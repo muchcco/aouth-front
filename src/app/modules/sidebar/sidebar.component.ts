@@ -10,6 +10,7 @@ import { UserService } from 'src/app/_service/user-service.service';
 export class SidebarComponent {
   userName: string = '';
   cargo: string = '';
+  perfil:string | null = '';
 
   constructor(private authService: AuthService, private userService: UserService) {}
 
@@ -19,6 +20,7 @@ export class SidebarComponent {
 
   loadUserData(): void {
     const userName = localStorage.getItem('name'); // Recupera el nombre de usuario del localStorage
+    this.perfil = localStorage.getItem('idPerfil'); // Recupera el perfil del usuario del localStorage
     if (userName) {
       this.userService.getUserByName(userName).subscribe(
         (response) => {
@@ -26,7 +28,7 @@ export class SidebarComponent {
           if (response.status === 1) {
             this.userName = response.data.datos_com.NOMBREU;
             this.cargo = response.data.datos_com.CARGO;
-            console.log(this.cargo);
+            // console.log("SIDEBAR ES",response.data.datos_com);
           } else {
             console.error('Error al obtener datos del usuario', response.message);
           }

@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   { 
     path: 'administrator', 
-    loadChildren: () => import('./pages/reports/reports.module').then(m => m.ReportsModule), 
+    loadChildren: () => import('./pages/administrator/administrator.module').then(m => m.AdministratorModule), 
     canActivate: [AuthGuard] 
   },
   { path: 'logout', redirectTo: '/login', pathMatch: 'full' }, // Ruta para cerrar sesión

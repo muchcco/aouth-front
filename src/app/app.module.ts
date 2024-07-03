@@ -15,12 +15,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginComponent } from './login/login/login.component';
 import { ErrorInterceptor } from './_helpers/error-interceptor.service';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SharedComponent,
+    ReportsComponent,
     ConnectionValidationModalComponent,
     
   ],
@@ -31,7 +33,6 @@ import { ErrorInterceptor } from './_helpers/error-interceptor.service';
     HttpClientModule,
     AppRoutingModule,  // Asegúrate de que AppRoutingModule esté incluido aquí
     RouterModule,
-    ReportsModule,
     NgxSpinnerModule,
     ModalModule.forRoot()
   ],

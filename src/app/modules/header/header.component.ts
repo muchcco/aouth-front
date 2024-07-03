@@ -10,6 +10,7 @@ import { UserService } from 'src/app/_service/user-service.service';
 export class HeaderComponent implements OnInit {
   userName: string = '';
   cargo: string = '';
+  perfil:string | null = '';
 
   constructor(private authService: AuthService, private userService: UserService) {}
 
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   loadUserData(): void {
     const userName = localStorage.getItem('name'); // Recupera el nombre de usuario del localStorage
+    this.perfil = localStorage.getItem('idPerfil'); // Recupera el perfil del usuario del localStorage
     if (userName) {
       this.userService.getUserByName(userName).subscribe(
         (response) => {

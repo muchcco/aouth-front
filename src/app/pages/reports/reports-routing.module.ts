@@ -8,12 +8,12 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'reports', component: ReportsComponent },
+      { path: '', component: ReportsComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'attention', loadChildren: () => import('./attention/attention.module').then(m => m.AttentionModule) },
       { path: 'status', loadChildren: () => import('./status/status.module').then(m => m.StatusModule) },
-      { path: 'multichannel', loadChildren: () => import('./multichannel/multichannel.module').then(m => m.MultichannelModule) },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: 'multichannel', loadChildren: () => import('./multichannel/multichannel.module').then(m => m.MultichannelModule) }      
     ]
   }
 ];

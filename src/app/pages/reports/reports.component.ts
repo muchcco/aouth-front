@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SessionService } from 'src/app/_service/session.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
-export class ReportsComponent implements OnInit {
-  constructor(private sessionService: SessionService) {}
+export class ReportsComponent {
 
-  ngOnInit() {
-    // this.sessionService.start();
-    console.log("sda");  // Este mensaje debería aparecer en la consola
-  }
+  constructor(private router: Router) {}
+
+  ngOnInit() {    
+    // console.log("redireccion");  // Este mensaje debería aparecer en la consola
+    this.router.navigate(['/reports/dashboard'])
+  } 
 }

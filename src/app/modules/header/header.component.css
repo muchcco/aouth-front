@@ -11,5 +11,6 @@
 }
 
 .especialista-cam{
-    text-transform: lowercase;
+    /* text-transform: lowercase; */
+    font-size: 19px;
 }

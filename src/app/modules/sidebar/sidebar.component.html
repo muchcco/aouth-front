@@ -1,9 +1,9 @@
 
 <div class="d-flex flex-column flex-shrink-0 text-white bg-head sidebar" style="width: 240px;">
-  <a [routerLink]="'/reports/dashboard'" class="logo-d">      
+  <div  class="logo-d">      
     
     <img src="assets/img/logo-mac.png" alt="MAC Logo" class="logo p-1">
-  </a>
+  </div>
   
   <div class="dropdown">
     <P class="datos">Usuario: <br />{{ userName }}</P>
@@ -11,24 +11,32 @@
   </div>
   <hr>
   <nav class="my-1"> 
-    <ul class="nav nav-pills flex-column">
-      <li class="nav-item">
+    <ul class="nav nav-pills flex-column">      
+      <!-- MOSTRAMOS LOS DATOS QUE SE VERAN EN EL PERFIL DE REPORETERIA -->
+      <li class="nav-item" *ngIf="perfil === '2'">
         <a [routerLink]="'/reports/dashboard'" routerLinkActive="active" class="nav-link text-white" aria-current="page">
           <i class="fas fa-home bi"></i>
           DASHBOARD
         </a>
       </li>
       
-      <li class="nav-item ">
+      <li class="nav-item " *ngIf="perfil === '2'">
         <a [routerLink]="'/reports/attention'" routerLinkActive="active" class="nav-link text-white" aria-current="page">        
           <i class="fa fa-person bi"></i>
           REPORTE POR ATENCIÓN
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="perfil === '2'">
         <a [routerLink]="'/reports/status'" routerLinkActive="active" class="nav-link text-white" aria-current="page">        
           <i class="fa fa-person bi"></i>
           REPORTE POR ESTADO
+        </a>
+      </li>
+      <!-- MOSTRAMOS LOS DATOS QUE SE VERAN EN EL PERFIL DE ADMINISTRADOR -->
+      <li class="nav-item" *ngIf="perfil === '4'">
+        <a [routerLink]="'/administrator/users'" routerLinkActive="active" class="nav-link text-white" aria-current="page">        
+          <i class="fa fa-person bi"></i>
+          USUARIOS
         </a>
       </li>
     </ul>
