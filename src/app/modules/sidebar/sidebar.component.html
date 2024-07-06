@@ -39,6 +39,13 @@
           USUARIOS
         </a>
       </li>
+      <!-- MOSTRAMOS LOS DATOS QUE SE VERAN EN EL PERFIL DE REPOSITORIO -->
+      <li class="nav-item" *ngIf="perfil === '5'">
+        <a [routerLink]="'/repository/document'" routerLinkActive="active" class="nav-link text-white" aria-current="page">        
+          <i class="fa fa-person bi"></i>
+          DOCUMENTOS
+        </a>
+      </li>
     </ul>
   </nav>
 

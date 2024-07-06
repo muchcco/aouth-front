@@ -78,6 +78,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/reports']);
           }else if(this.selectedProfileId == '4'){
             this.router.navigate(['/administrator']);
+          }else if(this.selectedProfileId == '5'){
+            this.router.navigate(['/repository']);
           }
         } else {
           this.errorMessage = response.message;

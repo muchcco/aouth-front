@@ -38,6 +38,12 @@ body {
 }
 
 .card {
+    background-image: url('/assets/img/fondo-bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(32, 23, 23, 0.1);

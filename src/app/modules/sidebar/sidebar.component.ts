@@ -28,9 +28,8 @@ export class SidebarComponent {
           if (response.status === 1) {
             this.userName = response.data.datos_com.NOMBREU;
             this.cargo = response.data.datos_com.CARGO;
-            // console.log("SIDEBAR ES",response.data.datos_com);
           } else {
-            console.error('Error al obtener datos del usuario', response.message);
+            // console.error('Error al obtener datos del usuario', response.message);
           }
         },
         (error) => {

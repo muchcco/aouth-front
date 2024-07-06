@@ -14,7 +14,7 @@ export class AppComponent {
 
   ngOnInit() {
     
-    console.log("conexion ba");  // Este mensaje debería aparecer en la consola
+    // console.log("conexion ba");  // Este mensaje debería aparecer en la consola
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       // Start the session timeout service

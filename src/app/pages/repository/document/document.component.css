@@ -1,0 +1,12 @@
+.metof{
+    display: flex;
+}
+
+.card{
+    margin: .7em;
+}
+
+.treeview_file{
+    text-decoration: none;
+    list-style: none;
+}

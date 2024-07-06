@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header text-bg-success">
+        <h5 class="card-title">ÍNDICE</h5>
+      </div>
+      <div class="card-body">
+        <ul class="treeview_file" *ngFor="let document of documents">
+          <li>
+            <a >
+              <i class="fa-solid fa-folder" style="color: #ffd33c;"></i> 
+              {{ document.denominacion }} 
+            </a>
+            <ul class="treeview_file">
+              <li *ngFor="let subdocument of document.children">
+                <i class="fa-solid fa-folder" style="color: #ffd33c;"></i>
+                {{ document.denominacion }} 
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header text-bg-dark">
+            <h5 class="card-title">FILTRO DE BÚSQUEDA</h5>
+        </div>
+        <div class="card-body">
+    
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header text-bg-primary">
+            <h5 class="card-title">RESULTADOS</h5>
+        </div>
+        <div class="card-body">
+            <div class="table table-responsive table-hover" id="table_data">
+                <table  class="table table-responsive table-hover">
+                    <thead class="table-dark">
+                      <tr>
+                        <!-- Define los encabezados de tu tabla aquí -->
+                        <th>N°</th>
+                        <th>CARPETA</th>
+                        <th>DOCUMENTO</th>
+                        <th>DESCRIPCION</th>
+                        <th>URL</th>
+                        <th>TAGS</th>
+                        <th>ACCIONES</th>
+                        <!-- Más columnas si es necesario -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let detail of details | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ detail.categoria }}</td>
+                        <td>{{ detail.documento }}</td>                  
+                        <td>{{ detail.descripcion }}</td>
+                        <td>
+                            <a href="{{ detail.url }}" target="_blank"><i class="fa-solid fa-file-pdf text-danger"></i></a>                        
+                        </td>
+                        <td>{{ detail.tags }}</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                    <tfoot> 
+                      <tr>
+                        <td colspan="6" class="text-end">
+                          <pagination-controls *ngIf="details.length > 0" (pageChange)="page = $event">
+                            <ng-template ngx-pagination-template let-model="model">
+                              <div class="ngx-pagination">
+                                <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
+                                <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
+                                <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
+                              </div>
+                            </ng-template>
+                          </pagination-controls>
+                        </td>
+                        <td>Página</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <p *ngIf="details.length === 0">Sin resultado en la búsqueda...</p>
+                  
+              
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

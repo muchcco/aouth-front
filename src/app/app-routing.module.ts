@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/administrator/administrator.module').then(m => m.AdministratorModule), 
     canActivate: [AuthGuard] 
   },
+  { 
+    path: 'repository', 
+    loadChildren: () => import('./pages/repository/repository.module').then(m => m.RepositoryModule), 
+    canActivate: [AuthGuard] 
+  },
   { path: 'logout', redirectTo: '/login', pathMatch: 'full' }, // Ruta para cerrar sesión
   { path: 'error404', component: Error404Component },
   { path: 'error500', component: Error500Component },
