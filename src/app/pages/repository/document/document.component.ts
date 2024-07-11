@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DocumentService } from './service/document.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AdddocumentComponent } from './modal/adddocument/adddocument.component';
 
 @Component({
   selector: 'app-document',
@@ -16,9 +18,9 @@ export class DocumentComponent {
 
   activeNodeId: number | null = null;
   selectedPath: string = '';
+  bsModalRef!: BsModalRef;
 
-
-  constructor (private documentService: DocumentService) {}
+  constructor(private documentService: DocumentService, private modalService: BsModalService) {}
 
   ngOnInit(): void {
     this.getTreeview();
@@ -75,18 +77,23 @@ export class DocumentComponent {
 
   getNodePath(nodeId: number, nodes: any[], path: string): string {
     for (const node of nodes) {
-      console.log(nodeId)
+      // console.log(nodeId)
       if (node.id === nodeId) {
         return `${path} > ${node.id} - ${node.denominacion}`;
       }
       if (node.children?.length) {
         const result = this.getNodePath(nodeId, node.children, `${path} > ${node.id} - ${node.denominacion}`);
-        console.log(result);
+        // console.log(result);
         if (result) {
           return result;
         }
       }
     }
     return path;
+  }
+
+
+  openAddDocumentModal(): void {
+    this.bsModalRef = this.modalService.show(AdddocumentComponent);
   }
 }

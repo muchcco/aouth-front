@@ -44,22 +44,24 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-header text-bg-dark">
         <h5 class="card-title">FILTRO DE BÚSQUEDA</h5>
       </div>
       <div class="card-body">
-        <!-- Aquí puedes agregar filtros adicionales si lo deseas -->
       </div>
-    </div>
+    </div> -->
+    <div class="buto-m">
+      <button class="btn btn-info text-white" (click)="openAddDocumentModal()">Nuevo Documento</button>
+    </div>    
     <div class="card">
       <div class="card-header text-bg-primary">
         <h5 class="card-title">RESULTADOS</h5>
       </div>
       <div class="card-body">
-        <div *ngIf="selectedPath" class="breadcrumb">
+        <!-- <div *ngIf="selectedPath" class="breadcrumb">
           {{ selectedPath.substring(3) }}
-        </div>
+        </div> -->
         <div class="table table-responsive table-hover" id="table_data">
           <table class="table table-responsive table-hover">
             <thead class="table-dark">

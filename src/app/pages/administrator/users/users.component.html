@@ -1,6 +1,6 @@
 <div class="col-12">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header text-bg-primary">
         FILTROS DE BÚSQUEDA
       </div>
       <div class="card-body">
@@ -21,13 +21,13 @@
 <br />
 <div class="col-12">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header text-bg-secondary">
       RESULTADOS
     </div>
-    <div class="card-body">
+    <div class="card-body ">
       <div class="table table-responsive table-hover" id="table_data">
           <table  class="table table-responsive table-hover">
-              <thead class="table-dark">
+              <thead class="table-dark ">
                 <tr>
                   <!-- Define los encabezados de tu tabla aquí -->
                   <th>N°</th>
@@ -52,6 +52,7 @@
                   <td>{{ user.CORREO }}</td>
                   <td>{{ user.perfiles }}</td>
                   <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -64,8 +65,7 @@
                   <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
                 </div>
               </ng-template>
-            </pagination-controls>
-        
+            </pagination-controls>        
       </div>
     </div>
   </div>
