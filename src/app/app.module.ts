@@ -16,6 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginComponent } from './login/login/login.component';
 import { ErrorInterceptor } from './_helpers/error-interceptor.service';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { AdddocumentModule } from './pages/repository/document/modal/adddocument/adddocument.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReportsComponent } from './pages/reports/reports.component';
     AppRoutingModule,  // Asegúrate de que AppRoutingModule esté incluido aquí
     RouterModule,
     NgxSpinnerModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AdddocumentModule
   ],
   providers: [
     {

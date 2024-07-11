@@ -9,7 +9,7 @@
     <form>
       <div class="row">
         <div class="col">
-          <label for="documentName">Carpeta</label>
+          <label for="documentName">Carpetas</label>
           <select name="document" [(ngModel)]="data" class="form-select">
             <option value="">Todos</option>
             <option *ngFor="let doc of documents" [value]="doc.id">{{ doc.denominacion }}</option>
