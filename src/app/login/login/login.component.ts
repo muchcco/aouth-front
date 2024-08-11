@@ -6,6 +6,7 @@ import { AuthService } from '../../_service/auth.service';
 import { Profile } from '../../_models/profile.model';
 import { UserService } from '../../_service/user-service.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -37,18 +38,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProfiles();
-    this.openModal();
-    this.apiService.initializeApiUrl().subscribe(
-      () => {
-        this.modalRef.hide();
-        this.spinner.hide();
-      },
-      (error: any) => {
-        this.modalRef.hide();
-        this.spinner.hide();
-        alert('Error al validar las URLs de la API');
-      }
-    );
 
     // Establecer la imagen de fondo aleatoria
     const randomImageUrl = 'assets/img/auth/' + this.getRandomImage();
@@ -80,6 +69,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/administrator']);
           }else if(this.selectedProfileId == '5'){
             this.router.navigate(['/repository']);
+          }else if (this.selectedProfileId == '1') { 
+            window.location.href = `${environment.intranetUrl}/login?email=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
           }
         } else {
           this.errorMessage = response.message;

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://190.187.182.55:8081/login/auth-backend/public/api'; // Reemplaza con la URL de tu backend
+  
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
