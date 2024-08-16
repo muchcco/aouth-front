@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
   profiles: Profile[] = [];
   isLoading: boolean = false;
+  isLoadingProfiles: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -98,16 +99,27 @@ export class LoginComponent implements OnInit {
     if (this.name) {
       this.authService.getProfiles(this.name).subscribe(
         response => {
-          this.profiles = response.data.profiles;
-          this.showProfileSelect = true;
-          this.errorMessage = '';
+          if (response.status === 1) { // Asumiendo que un status de 1 significa éxito
+            this.profiles = response.data.profiles;
+            this.showProfileSelect = true;
+            this.errorMessage = '';
+          } else {
+            // Manejo de errores específicos al buscar perfiles
+            this.errorMessage = 'No se encontraron perfiles para el usuario ingresado.';
+            this.showProfileSelect = false;
+          }
+          this.isLoadingProfiles = false;
         },
         error => {
-          this.errorMessage = error.error.message;
+          // Manejo del error en el componente
+          this.errorMessage = 'Hubo un error al buscar los perfiles. Por favor, intente de nuevo.';
           this.showProfileSelect = false;
-          console.log(this.errorMessage)
+          this.isLoadingProfiles = false;
+          console.log(this.errorMessage);
         }
       );
+    } else {
+      this.isLoadingProfiles = false;
     }
   }
 
@@ -116,7 +128,7 @@ export class LoginComponent implements OnInit {
       'anden.jpg',
       'arequipa.jpg',
       'lima-barranco.jpg',
-      // Agrega aquí el nombre de todas tus imágenes en la carpeta assets/img/auth
+      // Agrega aquí el nombre de todas las imágenes en la carpeta assets/img/auth
     ];
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
@@ -126,6 +138,8 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
     this.profiles = [];
     this.selectedProfileId = null;
+    this.isLoadingProfiles = true;
     this.loadProfiles();
   }
+
 }

@@ -14,7 +14,8 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-success mx-2" >Agregar nuevo usuario</button>
+        <button class="btn btn-success mx-2" (click)="openAddUserModal()">Agregar nuevo usuario</button>
+        
       </div>
     </div>
 </div>
@@ -55,17 +56,25 @@
                   <td></td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="6"></td>
+                  <td colspan="3">
+                    <pagination-controls *ngIf="users.length > 0" (pageChange)="page = $event">
+                      <ng-template ngx-pagination-template let-model="model">
+                        <div class="ngx-pagination">
+                          <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
+                          <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
+                          <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
+                        </div>
+                      </ng-template>
+                    </pagination-controls>  
+                  </td>
+                </tr>
+              </tfoot>
             </table>
             <p *ngIf="users.length === 0">Sin resultado en la búsqueda...</p>
-            <pagination-controls *ngIf="users.length > 0" (pageChange)="page = $event">
-              <ng-template ngx-pagination-template let-model="model">
-                <div class="ngx-pagination">
-                  <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
-                  <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
-                  <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
-                </div>
-              </ng-template>
-            </pagination-controls>        
+                  
       </div>
     </div>
   </div>

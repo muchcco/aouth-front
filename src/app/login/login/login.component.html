@@ -47,12 +47,19 @@
           <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Contraseña" class="form-control" aria-label="Password" aria-describedby="basic-addon1">
         </div>
 
+        <div class="preload-per" [hidden]="!isLoadingProfiles">
+          <span *ngIf="isLoadingProfiles" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span> Cargando perfiles
+        </div>
+
         <div class="mb-3" *ngIf="showProfileSelect">
           <label for="profile" class="form-label label-text">Seleccionar Perfil</label>
-          <select id="profile" [(ngModel)]="selectedProfileId" name="profile" required class="form-select" aria-label="Default select example">
-            <option value="" selected>-- SELECCIONE UNA VISTA --</option>
-            <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.description }}</option>
-          </select>
+          <div class="d-flex align-items-center">
+            <select id="profile" [(ngModel)]="selectedProfileId" name="profile" required class="form-select" aria-label="Default select example" [disabled]="isLoadingProfiles">
+              <option value="" selected>-- SELECCIONE UNA VISTA --</option>
+              <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.description }}</option>
+            </select>
+            
+          </div>
         </div>
 
         <div *ngIf="errorMessage" class="error">

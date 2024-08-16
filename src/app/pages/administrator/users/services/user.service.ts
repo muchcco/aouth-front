@@ -14,4 +14,12 @@ export class UserService {
   getUsers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/users-list`);
   }
+
+  getPersonalM(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user-personal`);
+  }
+
+  saveUser(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user-store`, user);
+  }
 }

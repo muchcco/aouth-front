@@ -1,0 +1,34 @@
+<div class="modal-le">
+    <div class="modal-header " >
+      <h5 class="modal-title">Agregar Nueva Entida</h5>
+      <button type="button" class="btn-close"  aria-label="Close" (click)="onCancel()"></button>
+    </div>
+    <div class="modal-body">
+      <form >
+        <div class="form-group col-12">
+            <div class="">
+              <label for="">Entidad</label>
+              <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="data.nombre"  placeholder="PRESIDENCIA DEL CONSEJO DE MINISTROS">
+            </div>
+        </div>
+
+        <div class="form-group col-12">
+            <div class="">
+              <label for="">Nombre corto</label>
+              <input type="text" name="nombre_corto" id="nombre_corto" class="form-control" [(ngModel)]="data.nombre_corto" placeholder="PCM">
+            </div>
+        </div>
+        
+        <!-- Agrega aquí más campos según sea necesario -->
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cerrar</button>
+        <button type="button" class="btn btn-outline-success" (click)="saveEntity()" [disabled]="isLoading">
+            Guardar Entidad
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+    
+  </div>
+  

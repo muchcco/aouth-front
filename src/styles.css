@@ -1,5 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-
+body, html{   
+    font-family: "Roboto", sans-serif;
+}
 .card{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
@@ -16,4 +17,12 @@ table > tbody > tr > td{
     vertical-align: middle !important;
     font-size: 14px !important;
     color: #383838 !important;
+}
+
+
+/***** FORMULARIOS *****/
+
+label{
+    font-size: 14px !important;
+    color: #303e67;
 }

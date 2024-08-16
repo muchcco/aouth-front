@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     console.log('AuthGuard: Verificando acceso a:', state.url);
     if (isPlatformBrowser(this.platformId)) {
       const accessToken = localStorage.getItem('access_token');
-      console.log('AuthGuard: Token de acceso encontrado:', accessToken);
+      // console.log('AuthGuard: Token de acceso encontrado:', accessToken);
       if (accessToken) {
         return true;
       } else {

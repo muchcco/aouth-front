@@ -39,6 +39,12 @@
           USUARIOS
         </a>
       </li>
+      <li class="nav-item" *ngIf="perfil === '4'">
+        <a [routerLink]="'/administrator/entitymac'" routerLinkActive="active" class="nav-link text-white" aria-current="page">                  
+          <i class="fa-solid fa-building-circle-check"></i>
+          ENTIDADES
+        </a>
+      </li>
       <!-- MOSTRAMOS LOS DATOS QUE SE VERAN EN EL PERFIL DE REPOSITORIO -->
       <li class="nav-item" *ngIf="perfil === '5'">
         <a [routerLink]="'/repository/document'" routerLinkActive="active" class="nav-link text-white" aria-current="page">        

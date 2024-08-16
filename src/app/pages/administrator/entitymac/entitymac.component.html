@@ -1,0 +1,102 @@
+<div class="col-12">
+    <div class="card">
+      <div class="card-header text-bg-primary">
+        AGREGAR NUEVA ENTIDAD
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="">Entidad:</label>
+              <select name="nom_mac" [(ngModel)]="selectedMac" class="form-select">
+                <option value="" selected>Todos</option>
+                <option *ngFor="let mc of mac" [value]="mc.IDCENTRO_MAC">{{ mc.NOMBRE_MAC }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label class="">Entidad:</label>
+              <ng-select [items]="entitys"
+                      bindLabel="customLabel"
+                        bindValue="IDENTIDAD"
+                        [(ngModel)]="entity.IDENTIDAD"
+                        placeholder="Seleccione un nombre"
+                        name="IDENTIDAD" class="select-2-par form-select"
+                        [ngModelOptions]="{standalone: true}">
+                <ng-template ng-label-tmp let-item="item">
+                    {{ item.NOMBRE_ENTIDAD }}
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                    <div [ngClass]="'custom-option-class'">
+                        {{ item.NOMBRE_ENTIDAD }}
+                    </div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-success mx-2" (click)="saveEntity()">Guardar entidad</button>
+        <button class="btn btn-info text-white" (click)="openAddUserModal()">Agregar nueva entidad</button>
+      </div>
+    </div>
+</div>
+<br />
+<div class="col-12">
+  <div class="card">
+    <div class="card-header text-bg-secondary">
+      RESULTADOS
+    </div>
+    <div class="card-body ">
+      <div class="table table-responsive table-hover" id="table_data">
+        <table  class="table table-responsive table-hover">
+          <thead class="table-dark ">
+            <tr>
+              <th>N°</th>
+              <th>CENTRO MAC</th>
+              <th>ENTIDAD</th>
+              <th>ENTIDAD COMPLETA</th>
+              <th>ESTADO</th>
+              <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lis of list | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index">
+              <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+              <td>{{ lis.NOMBRE_MAC }}</td>
+              <td>{{ lis.ABREV_ENTIDAD }}</td>                  
+              <td>{{ lis.NOMBRE_ENTIDAD }}</td>
+              <td>
+                <span [ngClass]="lis.FLAG === 1 ? 'text-success' : 'text-danger'">
+                  {{ lis.FLAG === 1 ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4"></td>
+              <td colspan="2">
+                <pagination-controls *ngIf="list.length > 0" (pageChange)="page = $event">
+                  <ng-template ngx-pagination-template let-model="model">
+                    <div class="ngx-pagination">
+                      <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
+                      <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
+                      <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
+                    </div>
+                  </ng-template>
+                </pagination-controls>  
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        
+              
+          <p *ngIf="list.length === 0">Sin resultado en la búsqueda...</p>
+      </div>
+    </div>
+  </div>
+</div>

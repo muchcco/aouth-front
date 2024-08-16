@@ -10,6 +10,7 @@ const routes: Routes = [
       children: [
         { path: 'administrator', component: AdministratorComponent },
         { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+        { path: 'entitymac', loadChildren: () => import('./entitymac/entitymac.module').then(m => m.EntitymacModule) },
         { path: '', redirectTo: 'users', pathMatch: 'full' }
       ]
     }
