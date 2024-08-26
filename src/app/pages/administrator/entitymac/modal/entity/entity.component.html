@@ -8,14 +8,30 @@
         <div class="form-group col-12">
             <div class="">
               <label for="">Entidad</label>
-              <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="data.nombre"  placeholder="PRESIDENCIA DEL CONSEJO DE MINISTROS">
+              <input
+                  type="text"
+                  name="nombre"
+                  id="nombre"
+                  class="form-control"
+                  [(ngModel)]="data.nombre"
+                  (input)="data.nombre = (data.nombre || '').toUpperCase()"
+                  placeholder="PRESIDENCIA DEL CONSEJO DE MINISTROS"
+                />
             </div>
         </div>
 
         <div class="form-group col-12">
             <div class="">
               <label for="">Nombre corto</label>
-              <input type="text" name="nombre_corto" id="nombre_corto" class="form-control" [(ngModel)]="data.nombre_corto" placeholder="PCM">
+              <input
+                  type="text"
+                  name="nombre_corto"
+                  id="nombre_corto"
+                  class="form-control"
+                  [(ngModel)]="data.nombre_corto"
+                  (input)="data.nombre_corto = (data.nombre_corto || '').toUpperCase()"
+                  placeholder="PCM"
+                />
             </div>
         </div>
         

@@ -18,7 +18,7 @@ export class EntitymacComponent {
   list: any[] = [];
   mac: Mac[] = [];
   page: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 15;
   entitys: Entitymac[] = [];
   selectedMac: number | null = null;
   bsModalRef!: BsModalRef;
@@ -81,7 +81,7 @@ export class EntitymacComponent {
         if (response.status === 1) {
           this.entitys = response.entity.map((entity: Entitymac) => ({
             ...entity,
-            customLabel: `${entity.NOMBRE_ENTIDAD}`
+            customLabel: `${entity.ABREV_ENTIDAD} - ${entity.NOMBRE_ENTIDAD}`
           }));
           console.log("Entidades: ",this.entitys);
         } else {
@@ -95,6 +95,27 @@ export class EntitymacComponent {
   }
 
   saveEntity(): void {
+
+    if (!this.selectedMac) {
+      Swal.fire({
+        title: 'Falta seleccionar el Centro MAC',
+        text: 'Por favor, selecciona un Centro MAC antes de guardar.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  
+    if (!this.entity.IDENTIDAD) {
+      Swal.fire({
+        title: 'Falta seleccionar la Entidad',
+        text: 'Por favor, selecciona una Entidad antes de guardar.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
     const data = {
       mac: this.selectedMac,
       entity: this.entity.IDENTIDAD
@@ -125,17 +146,58 @@ export class EntitymacComponent {
             // Aquí podrías actualizar la lista o hacer alguna acción posterior
           },
           error => {
+            const errorMessage = error?.error?.message || 'Hubo un error al guardar la entidad.';
             Swal.fire(
               'Error',
-              'Hubo un error al guardar la entidad.',
-              'error'
+              errorMessage,
+              'warning'
             );
-            console.error('Error al guardar la entidad', error);
+            console.error('Error al guardar la entidad', errorMessage);
           }
         );
       }
     });
   }
+
+  deleteEntity(entity: any): void {
+
+
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar la entidad ${entity.NOMBRE_ENTIDAD}? Esta acción no se puede deshacer.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Llamada al servicio para eliminar la entidad
+        this.EntitymacService.deleteEntity(entity.IDMAC_ENTIDAD).subscribe(
+          response => {
+            Swal.fire(
+              'Eliminado',
+              'La entidad ha sido eliminada exitosamente.',
+              'success'
+            );
+            this.getList(); // Actualiza la lista después de eliminar
+          },
+          error => {
+            const errorMessage = error?.error?.message || 'Hubo un error al eliminar la entidad.';
+            Swal.fire(
+              'Error',
+              errorMessage,
+              'error'
+            );
+            console.error('Error al eliminar la entidad', errorMessage);
+          }
+        );
+      }
+    });
+  }
+  
 
   /************************* modal ******************* */
 

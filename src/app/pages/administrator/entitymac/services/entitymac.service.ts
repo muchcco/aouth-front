@@ -30,4 +30,8 @@ export class EntitymacService {
   saveModalEntity(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/entity-modal-store`, data);
   }
+
+  deleteEntity(idmacent: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/entity-delete`, {  idmacent });
+  }
 }

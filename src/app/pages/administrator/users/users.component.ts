@@ -34,6 +34,14 @@ export class UsersComponent {
     );
   }
 
+  getRoleNames(user: any): string {
+    if (user && user.roles) {
+      return user.roles.map((role: any) => role.name).join(', ');
+    }
+    return '';
+  }
+  
+
   openAddUserModal(): void {
     this.bsModalRef = this.modalService.show(UserModalComponent);
   

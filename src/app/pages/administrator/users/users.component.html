@@ -52,7 +52,9 @@
                   <td>{{ user.NOMBRE_MAC }}</td>
                   <td>{{ user.CORREO }}</td>
                   <td>{{ user.perfiles }}</td>
-                  <td></td>
+                  <td>
+                    {{ getRoleNames(user) }}
+                  </td>
                   <td></td>
                 </tr>
               </tbody>
