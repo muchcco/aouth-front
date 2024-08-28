@@ -22,4 +22,20 @@ export class UserService {
   saveUser(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user-store`, user);
   }
+
+  getUserEdit(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user-edit?id=${id}`);
+  }
+  
+  updateUser(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user-update`, data);
+  }
+
+  changePassword(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user-password`, data);
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user-delete`, { id });
+  }
 }

@@ -55,7 +55,17 @@
                   <td>
                     {{ getRoleNames(user) }}
                   </td>
-                  <td></td>
+                  <td class="accion">
+                      <button class="no-btn" (click)="openEditUserModal(user)">
+                        <i class="fa-solid fa-pen-to-square text-success"></i>
+                      </button>
+                      <button class="no-btn" (click)="openChangePasswordModal(user)">
+                        <i class="fa-solid fa-key text-primary"></i>
+                      </button>
+                      <button class="no-btn" (click)="deleteUser(user)">
+                        <i class="fa-solid fa-trash-can text-danger"></i>
+                      </button>                    
+                  </td>
                 </tr>
               </tbody>
               <tfoot>

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class SessionService {
   private timeout: any;
-  private readonly timeoutDuration = 1200000; // 5000 seconds
+  private readonly timeoutDuration = 12000000; 
 
   constructor(private router: Router, private ngZone: NgZone) {}
 

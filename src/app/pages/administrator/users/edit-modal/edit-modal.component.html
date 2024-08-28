@@ -1,0 +1,57 @@
+<div class="modal-le">
+    <div class="modal-header">
+      <h5 class="modal-title">Editar Usuario: {{ user.name }}</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+    </div>
+    <div class="modal-body">
+        
+        <div *ngIf="!isLoading">
+            <div class="mb-3 mt-2">
+                <label for="roles" class="form-label">Roles <strong>(Se puede seleccionar solo una opción)</strong></label>
+                <div class="form-group">
+                  <div *ngFor="let roleId of objectKeys(rolesCompletos)" class="form-check form-check-inline">
+                    <input 
+                      class="form-check-input" 
+                      type="radio" 
+                      [id]="'rol_' + roleId" 
+                      [value]="roleId"
+                      [(ngModel)]="selectedRole" 
+                      name="selectedRole" 
+                      [checked]="selectedRole === +roleId">
+                    <label class="form-check-label" [for]="'rol_' + roleId">
+                      {{ rolesCompletos[roleId] }}
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <p>Rol seleccionado: {{ selectedRole }}</p>
+
+                         
+          
+            <div class="mb-3 mt-2">
+              <label for="profiles" class="form-label">Perfiles <strong>(Se puede seleccionar más de una opción)</strong></label>
+              <div class="row">
+                <div *ngFor="let profile of perfilesCompletos" class="btn-group" role="group" aria-label="Selección de perfiles">
+                  <input type="checkbox" class="btn-check" [id]="'perfil_' + profile.id" [value]="profile.id"
+                         autocomplete="off" [checked]="selectedProfiles.includes(profile.id)"
+                         (change)="onPerfilChange($event, profile.id)">
+                  <label class="btn btn-outline-primary" [for]="'perfil_' + profile.id">
+                    {{ profile.description }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cerrar</button>
+      <button type="button" class="btn btn-outline-success" (click)="updateUser()" [disabled]="saveLoading">
+        Guardar Cambios
+        <span *ngIf="saveLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  

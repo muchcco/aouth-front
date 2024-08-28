@@ -2,6 +2,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { UserService } from './services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserModalComponent } from './user-modal/user-modal.component';
+import { PasswordModalComponent } from './password-modal/password-modal.component';
+import Swal from 'sweetalert2';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-users',
@@ -39,6 +42,75 @@ export class UsersComponent {
       return user.roles.map((role: any) => role.name).join(', ');
     }
     return '';
+  }
+
+  deleteUser(user: any): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(user.id).subscribe(
+          response => {
+            if (response.status) {
+              Swal.fire(
+                'Eliminado',
+                'El usuario ha sido eliminado.',
+                'success'
+              );
+              this.reloadUsers();
+            } else {
+              Swal.fire(
+                'Error',
+                response.message,
+                'error'
+              );
+            }
+          },
+          error => {
+            Swal.fire(
+              'Error',
+              'No se pudo eliminar el usuario.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
+
+  openEditUserModal(user: any): void {
+    if (!user || !user.id) {
+      console.error('El usuario no tiene un ID válido:', user);
+      return;
+    }
+  
+    this.bsModalRef = this.modalService.show(EditModalComponent, {
+      initialState: {
+        userId: user.id  // Asegúrate de que el ID del usuario está disponible aquí
+      }
+    });
+  
+    this.bsModalRef.content.userUpdated.subscribe(() => {
+      this.reloadUsers();
+    });
+  }
+
+  openChangePasswordModal(user: any): void {
+    this.bsModalRef = this.modalService.show(PasswordModalComponent, {
+      initialState: {
+        user: user
+      }
+    });
+
+    this.bsModalRef.content.passwordUpdated.subscribe(() => {
+      this.reloadUsers();
+    });
   }
   
 

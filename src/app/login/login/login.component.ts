@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
           }else if(this.selectedProfileId == '5'){
             this.router.navigate(['/repository']);
           }else if (this.selectedProfileId == '1') { 
-            window.location.href = `${environment.intranetUrl}/login?email=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
+            window.location.href = `${environment.intranetUrl}/login?name=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
           }
         } else {
           this.errorMessage = response.message;
