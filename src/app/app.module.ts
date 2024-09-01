@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login/login.component';
 import { ErrorInterceptor } from './_helpers/error-interceptor.service';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { AdddocumentModule } from './pages/repository/document/modal/adddocument/adddocument.module';
+import { LoadingInterceptor } from './_helpers/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AdddocumentModule } from './pages/repository/document/modal/adddocument
     RouterModule,
     NgxSpinnerModule,
     ModalModule.forRoot(),
-    AdddocumentModule
+    AdddocumentModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
   providers: [
     {
@@ -45,6 +47,11 @@ import { AdddocumentModule } from './pages/repository/document/modal/adddocument
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true
     },
     ApiService,
